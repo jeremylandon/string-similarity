@@ -17,13 +17,6 @@ Finds degree of similarity between two strings, based on [Dice's Coefficient](ht
 
 ## Usage
 
-Add this to your package's pubspec.yaml file:
-
-```shell
-dependencies:
-	string-similarity: ^1.0.0
-```
-
 In your code:
 
 ```dart
