@@ -3,8 +3,8 @@ class StringSimilarity {
   /// Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case-sensitive.
   ///
   /// ##### Arguments
-  /// - first (string): The first string
-  /// - second (string): The second string
+  /// - first (String): The first string
+  /// - second (String): The second string
   ///
   /// (Order does not make a difference)
   ///
@@ -59,11 +59,11 @@ class StringSimilarity {
   /// Compares mainString against each string in targetStrings
   ///
   /// ##### Arguments
-  /// - mainString (string): The string to match each target string against.
-  /// - targetStrings (Array): Each string in this array will be matched against the main string.
+  /// - mainString (String): The string to match each target string against.
+  /// - targetStrings (List<String>): Each string in this array will be matched against the main string.
   ///
   /// ##### Returns
-  /// (Object): An object with a ratings property, which gives a similarity rating for each target string, a bestMatch property, which specifies which target string was most similar to the main string, and a bestMatchIndex property, which specifies the index of the bestMatch in the targetStrings array.
+  /// (BestMatch): An object with a ratings property, which gives a similarity rating for each target string, a bestMatch property, which specifies which target string was most similar to the main string, and a bestMatchIndex property, which specifies the index of the bestMatch in the targetStrings array.
   static BestMatch findBestMatch(String mainString, List<String> targetStrings) {
     final List<Rating> ratings = <Rating>[];
     int bestMatchIndex = 0;
