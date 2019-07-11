@@ -1,7 +1,8 @@
 name: string_similarity
-description: A starting point for Dart libraries or applications.
-# version: 1.0.0
-# author: Jérémy LANDON <jeremy.landon@outlook.com>
+description: Finds degree of similarity between two strings, based on Dice's Coefficient, which is mostly better than Levenshtein distance.
+version: 1.0.0
+author: Jérémy LANDON <jeremy.landon@outlook.com>
+homepage: https://github.com/Golapadeog/string-similarity
 
 environment:
   sdk: '>=2.4.0 <3.0.0'
