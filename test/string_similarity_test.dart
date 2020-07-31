@@ -44,7 +44,7 @@ void main() {
     });
 
     test('returns the correct value for different inputs:', () {
-      for (TestData td in _testData) {
+      for (var td in _testData) {
         expect(StringSimilarity.compareTwoStrings(td.sentenceA, td.sentenceB), td.expected);
       }
     });
@@ -61,23 +61,23 @@ void main() {
     });
 
     test('assigns a similarity rating to each string passed in the array', () {
-      final BestMatch matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
+      final matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
 
-      for (int i = 0; i < matches.ratings.length; i++) {
+      for (var i = 0; i < matches.ratings.length; i++) {
         expect(_testData[i].sentenceA, matches.ratings[i].target);
         expect(_testData[i].expected, matches.ratings[i].rating);
       }
     });
 
     test('returns the best match and its similarity rating', () {
-      final BestMatch matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
+      final matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
 
       expect(matches.bestMatch.target, 'sealed');
       expect(matches.bestMatch.rating, 0.8);
     });
 
     test('returns the index of best match from the target strings', () {
-      final BestMatch matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
+      final matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
 
       expect(matches.bestMatchIndex, 2);
     });

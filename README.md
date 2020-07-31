@@ -1,6 +1,6 @@
 # string-similarity
 
-Finds degree of similarity between two strings, based on [Dice's Coefficient](http://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient), which is mostly better than [Levenshtein distance](http://en.wikipedia.org/wiki/Levenshtein_distance).
+Finds degree of similarity between two strings, based on [Dice's Coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient), which is mostly better than [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance).
 
 ## Table of Contents
 
@@ -35,18 +35,18 @@ Requiring the module gives an object with two methods:
 
 Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case-sensitive.
 
-##### Arguments
+#### Arguments
 
 1. first (String): The first string
 2. second (String): The second string
 
 Order does not make a difference.
 
-##### Returns
+#### Returns
 
 (double): A fraction from 0 to 1, both inclusive. Higher number indicates more similarity.
 
-##### Examples
+#### Examples
 
 ```dart
 stringSimilarity.compareTwoStrings('healed', 'sealed');
@@ -69,16 +69,16 @@ stringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely goo
 
 Compares `mainString` against each string in `targetStrings`.
 
-##### Arguments
+#### Arguments
 
 1. mainString (String): The string to match each target string against.
 2. targetStrings (List\<String\>): Each string in this array will be matched against the main string.
 
-##### Returns
+#### Returns
 
 (BestMatch): An object with a `ratings` property, which gives a similarity rating for each target string, a `bestMatch` property, which specifies which target string was most similar to the main string, and a `bestMatchIndex` property, which specifies the index of the bestMatch in the targetStrings array.
 
-##### Examples
+#### Examples
 
 ```javascript
 stringSimilarity.findBestMatch('Olive-green table for sale, in extremely good condition.', [
@@ -100,7 +100,5 @@ stringSimilarity.findBestMatch('Olive-green table for sale, in extremely good co
   bestMatchIndex: 1
 }
 ```
-
-#
 
 **_based on 'string-similarity' Javascript project_** : [https://github.com/aceakash/string-similarity](https://github.com/aceakash/string-similarity)

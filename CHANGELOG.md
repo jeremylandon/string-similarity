@@ -1,3 +1,7 @@
+## 1.0.2
+
+- fix static analysis
+
 ## 1.0.1
 
 - update doc
