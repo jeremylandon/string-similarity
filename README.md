@@ -23,8 +23,12 @@ In your code:
 import  'package:string_similarity/string_similarity.dart';
 
 var similarity = StringSimilarity.compareTwoStrings('french', 'quebec');
+//or
+var similarity = 'french'.similarityTo('quebec');
 
 var matches = StringSimilarity.findBestMatch('healed', ['edward', 'sealed', 'theatre']);
+//or
+var matches = 'healed'.bestMatch(['edward', 'sealed', 'theatre']);
 ```
 
 ## API
@@ -49,18 +53,16 @@ Order does not make a difference.
 #### Examples
 
 ```dart
-stringSimilarity.compareTwoStrings('healed', 'sealed');
-// → 0.8
+'healed'.similarityTo('sealed'); // → 0.8
 
-stringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
-  'For sale: table in very good  condition, olive green in colour.');
+'Olive-green table for sale, in extremely good condition.'.similarityTo('For sale: table in very good  condition, olive green in colour.');
 // → 0.6060606060606061
 
-stringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
+StringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
   'For sale: green Subaru Impreza, 210,000 miles');
 // → 0.2558139534883721
 
-stringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
+StringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
   'Wanted: mountain bike with at least 21 gears.');
 // → 0.1411764705882353
 ```
