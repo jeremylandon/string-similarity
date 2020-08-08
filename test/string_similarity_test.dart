@@ -17,21 +17,25 @@ void main() {
         TestData(sentenceA: 'french', sentenceB: 'quebec', expected: 0),
         TestData(sentenceA: 'france', sentenceB: 'france', expected: 1),
         TestData(sentenceA: 'fRaNce', sentenceB: 'france', expected: 0.2),
+        TestData(sentenceA: 'corée du sud', sentenceB: 'coree du sud', expected: 0.7777777777777778),
         TestData(sentenceA: 'healed', sentenceB: 'sealed', expected: 0.8),
         TestData(sentenceA: 'web applications', sentenceB: 'applications of the web', expected: 0.7878787878787878),
         TestData(sentenceA: 'this will have a typo somewhere', sentenceB: 'this will huve a typo somewhere', expected: 0.92),
         TestData(
-            sentenceA: 'Olive-green table for sale, in extremely good condition.',
-            sentenceB: 'For sale: table in very good  condition, olive green in colour.',
-            expected: 0.6060606060606061),
+          sentenceA: 'Olive-green table for sale, in extremely good condition.',
+          sentenceB: 'For sale: table in very good  condition, olive green in colour.',
+          expected: 0.6060606060606061,
+        ),
         TestData(
-            sentenceA: 'Olive-green table for sale, in extremely good condition.',
-            sentenceB: 'For sale: green Subaru Impreza, 210,000 miles',
-            expected: 0.2558139534883721),
+          sentenceA: 'Olive-green table for sale, in extremely good condition.',
+          sentenceB: 'For sale: green Subaru Impreza, 210,000 miles',
+          expected: 0.2558139534883721,
+        ),
         TestData(
-            sentenceA: 'Olive-green table for sale, in extremely good condition.',
-            sentenceB: 'Wanted: mountain bike with at least 21 gears.',
-            expected: 0.1411764705882353),
+          sentenceA: 'Olive-green table for sale, in extremely good condition.',
+          sentenceB: 'Wanted: mountain bike with at least 21 gears.',
+          expected: 0.1411764705882353,
+        ),
         TestData(sentenceA: 'this has one extra word', sentenceB: 'this has one word', expected: 0.7741935483870968),
         TestData(sentenceA: 'a', sentenceB: 'a', expected: 1),
         TestData(sentenceA: 'a', sentenceB: 'b', expected: 0),
@@ -43,9 +47,18 @@ void main() {
       ];
     });
 
-    test('returns the correct value for different inputs:', () {
+    test('returns the correct value for different inputs', () {
       for (var td in _testData) {
         expect(StringSimilarity.compareTwoStrings(td.sentenceA, td.sentenceB), td.expected);
+      }
+    });
+
+    test('similarityTo extensions method return same result that StringSimilarity.compareTwoStrings', () {
+      for (var td in _testData) {
+        final a = StringSimilarity.compareTwoStrings(td.sentenceA, td.sentenceB);
+        final b = td.sentenceA.similarityTo(td.sentenceB);
+
+        expect(a.toString(), b.toString());
       }
     });
   });
@@ -80,6 +93,15 @@ void main() {
       final matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
 
       expect(matches.bestMatchIndex, 2);
+    });
+
+    test('bestMatch extensions method return same result that StringSimilarity.findBestMatch', () {
+      const mainString = 'healed';
+      final targetStrings = _testData.map((TestData testEntry) => testEntry.sentenceA).toList();
+      final a = StringSimilarity.findBestMatch(mainString, targetStrings);
+      final b = mainString.bestMatch(targetStrings);
+
+      expect(a.toString(), b.toString());
     });
   });
 }

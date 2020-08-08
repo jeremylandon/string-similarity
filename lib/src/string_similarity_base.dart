@@ -1,7 +1,12 @@
+import 'models/best_match.dart';
+import 'models/rating.dart';
+
 /// Finds degree of similarity between two strings, based on Dice's Coefficient, which is mostly better than Levenshtein distance.
 class StringSimilarity {
   /// Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case-sensitive.
   ///
+  /// _(same as 'string'.similarityTo extension method)_
+  /// 
   /// ##### Arguments
   /// - first (String): The first string
   /// - second (String): The second string
@@ -58,6 +63,8 @@ class StringSimilarity {
 
   /// Compares mainString against each string in targetStrings
   ///
+  /// _(same as 'string'.bestMatch extension method)_
+  /// 
   /// ##### Arguments
   /// - mainString (String): The string to match each target string against.
   /// - targetStrings (List<String>): Each string in this array will be matched against the main string.
@@ -83,22 +90,3 @@ class StringSimilarity {
   }
 }
 
-class Rating {
-  Rating({this.target, this.rating});
-
-  String target;
-  double rating;
-}
-
-class BestMatch {
-  BestMatch({this.ratings, this.bestMatch, this.bestMatchIndex});
-
-  /// similarity rating for each target string
-  List<Rating> ratings;
-
-  /// specifies which target string was most similar to the main string
-  Rating bestMatch;
-
-  /// which specifies the index of the bestMatch in the targetStrings array
-  int bestMatchIndex;
-}
