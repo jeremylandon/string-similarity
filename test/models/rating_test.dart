@@ -3,10 +3,16 @@ import 'package:test/test.dart';
 
 void main() {
   group('Rating', () {
-    test('toString return "target:rating{2}"', () {
-      final rating = Rating(rating: 1.23456, target: 'str');
+    test('toString return "target:rating{complete}"', () {
+      final rating = Rating(rating: 1/3, target: 'str');
 
-        expect(rating.toString(), 'str[1.23]');
+        expect(rating.toString(), '\'str\'[0.3333333333333333]');
+    });
+
+    test('toString return "target:rating" without useless numbers', () {
+      final rating = Rating(rating: 0.10000000000, target: 'str');
+
+        expect(rating.toString(), '\'str\'[0.1]');
     });
   });
 }

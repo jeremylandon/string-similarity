@@ -5,6 +5,8 @@ import 'models/rating.dart';
 class StringSimilarity {
   /// Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case-sensitive.
   ///
+  /// _(same as 'string'.similarityTo extension method)_
+  /// 
   /// ##### Arguments
   /// - first (String): The first string
   /// - second (String): The second string
@@ -61,6 +63,8 @@ class StringSimilarity {
 
   /// Compares mainString against each string in targetStrings
   ///
+  /// _(same as 'string'.bestMatch extension method)_
+  /// 
   /// ##### Arguments
   /// - mainString (String): The string to match each target string against.
   /// - targetStrings (List<String>): Each string in this array will be matched against the main string.

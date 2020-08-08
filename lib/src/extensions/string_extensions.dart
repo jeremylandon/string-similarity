@@ -1,7 +1,7 @@
 
 import '../../string_similarity.dart';
 
-extension StringSimilarityExtensions on String {
+extension StringExtensions on String {
   /// Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case-sensitive.
   /// 
   /// _(same as StringSimilarity.compareTwoStrings method)_

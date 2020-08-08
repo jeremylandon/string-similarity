@@ -1,5 +1,6 @@
 import 'rating.dart';
 
+/// Dice's Coefficient results
 class BestMatch {
   BestMatch({this.ratings, this.bestMatch, this.bestMatchIndex});
 

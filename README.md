@@ -2,47 +2,40 @@
 
 Finds degree of similarity between two strings, based on [Dice's Coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient), which is mostly better than [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance).
 
-## Table of Contents
+## :page_facing_up: Table of Contents
 
 - [Usage](#usage)
 - [API](#api)
-  - [compareTwoStrings(first, second)](#comparetwostringsfirst-second)
+  - ['string'.similarityTo(other)](#stringsimilarityToother)
     - [Arguments](#arguments)
     - [Returns](#returns)
     - [Examples](#examples)
-  - [findBestMatch(mainString, targetStrings)](#findbestmatchmainstring-targetstrings)
+  - ['string'.bestMatch(targetStrings)](#stringbestMatchtargetStrings)
     - [Arguments](#arguments-1)
     - [Returns](#returns-1)
     - [Examples](#examples-1)
 
-## Usage
+## :video_game: Usage
 
 In your code:
 
 ```dart
 import  'package:string_similarity/string_similarity.dart';
 
-var similarity = StringSimilarity.compareTwoStrings('french', 'quebec');
-//or
-var similarity = 'french'.similarityTo('quebec');
+var similarity = 'french'.similarityTo('quebec'); // or StringSimilarity.compareTwoStrings('french', 'quebec');
 
-var matches = StringSimilarity.findBestMatch('healed', ['edward', 'sealed', 'theatre']);
-//or
-var matches = 'healed'.bestMatch(['edward', 'sealed', 'theatre']);
+var matches = 'healed'.bestMatch(['edward', 'sealed', 'theatre']); // or StringSimilarity.findBestMatch('healed', ['edward', 'sealed', 'theatre']);
 ```
 
-## API
+## :books: API
 
-Requiring the module gives an object with two methods:
+### 'string'.similarityTo(other)
 
-### compareTwoStrings(first, second)
-
-Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case-sensitive.
+Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case and diacritic sensitive.
 
 #### Arguments
 
-1. first (String): The first string
-2. second (String): The second string
+- other (String): The second string
 
 Order does not make a difference.
 
@@ -55,26 +48,24 @@ Order does not make a difference.
 ```dart
 'healed'.similarityTo('sealed'); // → 0.8
 
-'Olive-green table for sale, in extremely good condition.'.similarityTo('For sale: table in very good  condition, olive green in colour.');
-// → 0.6060606060606061
+'france'.similarityTo('FrancE'); // → 0.6
 
-StringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
-  'For sale: green Subaru Impreza, 210,000 miles');
-// → 0.2558139534883721
-
-StringSimilarity.compareTwoStrings('Olive-green table for sale, in extremely good condition.',
-  'Wanted: mountain bike with at least 21 gears.');
-// → 0.1411764705882353
+'Olive-green table for sale, in extremely good condition.'.similarityTo('For sale: table in very good  condition, olive green in colour.'); // → 0.6060606060606061
 ```
 
-### findBestMatch(mainString, targetStrings)
+or you can use the `StringSimilarity.compareTwoStrings` static method
+
+```dart
+StringSimilarity.compareTwoStrings('healed', 'sealed'); // → 0.8
+```
+
+### 'string'.bestMatch(targetStrings)
 
 Compares `mainString` against each string in `targetStrings`.
 
 #### Arguments
 
-1. mainString (String): The string to match each target string against.
-2. targetStrings (List\<String\>): Each string in this array will be matched against the main string.
+- targetStrings (List\<String\>): Each string in this array will be matched against the main string.
 
 #### Returns
 
@@ -82,11 +73,11 @@ Compares `mainString` against each string in `targetStrings`.
 
 #### Examples
 
-```javascript
-stringSimilarity.findBestMatch('Olive-green table for sale, in extremely good condition.', [
+```dart
+'Olive-green table for sale, in extremely good condition.'.bestMatch([
   'For sale: green Subaru Impreza, 210,000 miles',
   'For sale: table in very good condition, olive green in colour.',
-  'Wanted: mountain bike with at least 21 gears.'
+  'Wanted: mountain bike with at least 21 gears.',
 ]);
 // →
 { ratings:
@@ -103,4 +94,18 @@ stringSimilarity.findBestMatch('Olive-green table for sale, in extremely good co
 }
 ```
 
+or you can use the `StringSimilarity.findBestMatch` static method
+
+```dart
+StringSimilarity.findBestMatch('Olive-green table for sale, in extremely good condition.', [
+  'For sale: green Subaru Impreza, 210,000 miles',
+  'For sale: table in very good condition, olive green in colour.',
+  'Wanted: mountain bike with at least 21 gears.',
+]);
+```
+
+## :crystal_ball: Credit
+
 **_based on 'string-similarity' Javascript project_** : [https://github.com/aceakash/string-similarity](https://github.com/aceakash/string-similarity)
+
+thanks [@shinayser](https://github.com/shinayser)
