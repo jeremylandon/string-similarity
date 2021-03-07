@@ -1,3 +1,6 @@
+## 2.0.0
+- Mirgrated to null safety
+
 ## 1.1.0
 
 - Added extensions.
