@@ -43,14 +43,14 @@ class StringSimilarity {
     final firstBigrams = <String, int>{};
     for (var i = 0; i < first.length - 1; i++) {
       final bigram = first.substring(i, i + 2);
-      final count = firstBigrams.containsKey(bigram) ? firstBigrams[bigram] + 1 : 1;
+      final count = firstBigrams.containsKey(bigram) ? firstBigrams[bigram]! + 1 : 1;
       firstBigrams[bigram] = count;
     }
 
     var intersectionSize = 0;
     for (var i = 0; i < second.length - 1; i++) {
       final bigram = second.substring(i, i + 2);
-      final count = firstBigrams.containsKey(bigram) ? firstBigrams[bigram] : 0;
+      final count = firstBigrams.containsKey(bigram) ? firstBigrams[bigram]! : 0;
 
       if (count > 0) {
         firstBigrams[bigram] = count - 1;
@@ -71,15 +71,15 @@ class StringSimilarity {
   ///
   /// ##### Returns
   /// (BestMatch): An object with a ratings property, which gives a similarity rating for each target string, a bestMatch property, which specifies which target string was most similar to the main string, and a bestMatchIndex property, which specifies the index of the bestMatch in the targetStrings array.
-  static BestMatch findBestMatch(String mainString, List<String> targetStrings) {
+  static BestMatch findBestMatch(String mainString, List<String?> targetStrings) {
     final ratings = <Rating>[];
     var bestMatchIndex = 0;
 
     for (var i = 0; i < targetStrings.length; i++) {
-      final currentTargetString = targetStrings[i];
+      final currentTargetString = targetStrings[i]!;
       final currentRating = compareTwoStrings(mainString, currentTargetString);
       ratings.add(Rating(target: currentTargetString, rating: currentRating));
-      if (currentRating > ratings[bestMatchIndex].rating) {
+      if (currentRating > ratings[bestMatchIndex].rating!) {
         bestMatchIndex = i;
       }
     }
