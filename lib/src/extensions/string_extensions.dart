@@ -24,5 +24,5 @@ extension StringExtensions on String {
   ///
   /// ##### Returns
   /// (BestMatch): An object with a ratings property, which gives a similarity rating for each target string, a bestMatch property, which specifies which target string was most similar to the main string, and a bestMatchIndex property, which specifies the index of the bestMatch in the targetStrings array.
-  BestMatch bestMatch(List<String> targetStrings) => StringSimilarity.findBestMatch(this, targetStrings);
+  BestMatch bestMatch(List<String?> targetStrings) => StringSimilarity.findBestMatch(this, targetStrings);
 }
