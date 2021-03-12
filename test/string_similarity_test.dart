@@ -2,15 +2,15 @@ import 'package:string_similarity/string_similarity.dart';
 import 'package:test/test.dart';
 
 class TestData {
-  TestData({this.sentenceA, this.sentenceB, this.expected});
+  TestData({this.sentenceA, this.sentenceB, required this.expected});
 
-  String sentenceA;
-  String sentenceB;
+  String? sentenceA;
+  String? sentenceB;
   double expected;
 }
 
 void main() {
-  List<TestData> _testData;
+  late List<TestData> _testData;
   group('compareTwoStrings', () {
     setUp(() {
       _testData = <TestData>[
@@ -37,13 +37,18 @@ void main() {
           expected: 0.1411764705882353,
         ),
         TestData(sentenceA: 'this has one extra word', sentenceB: 'this has one word', expected: 0.7741935483870968),
+        TestData(sentenceA: 'A', sentenceB: 'a', expected: 0),
         TestData(sentenceA: 'a', sentenceB: 'a', expected: 1),
         TestData(sentenceA: 'a', sentenceB: 'b', expected: 0),
         TestData(sentenceA: '', sentenceB: '', expected: 1),
         TestData(sentenceA: 'a', sentenceB: '', expected: 0),
         TestData(sentenceA: '', sentenceB: 'a', expected: 0),
         TestData(sentenceA: 'apple event', sentenceB: 'apple    event', expected: 1),
-        TestData(sentenceA: 'iphone', sentenceB: 'iphone x', expected: 0.9090909090909091)
+        TestData(sentenceA: 'iphone', sentenceB: 'iphone x', expected: 0.9090909090909091),
+        TestData(sentenceA: '10아이', sentenceB: '10아기', expected: 0.6666666666666666),
+        TestData(sentenceA: null, sentenceB: 'b', expected: 0),
+        TestData(sentenceA: 'a', sentenceB: null, expected: 0),
+        TestData(sentenceA: null, sentenceB: null, expected: 1),
       ];
     });
 
@@ -102,6 +107,14 @@ void main() {
       final b = mainString.bestMatch(targetStrings);
 
       expect(a.toString(), b.toString());
+    });
+
+    test('bestMatch extensions method can be call on null anonymous variable', () {
+      final a = null.bestMatch([null]);
+      final b = null.bestMatch(['a']);
+
+      expect(a.bestMatch.rating, 1);
+      expect(b.bestMatch.rating, 0);
     });
   });
 }

@@ -50,6 +50,8 @@ Order does not make a difference.
 
 'france'.similarityTo('FrancE'); // → 0.6
 
+'x'.similarityTo(null); // → 0.0
+
 'Olive-green table for sale, in extremely good condition.'.similarityTo('For sale: table in very good  condition, olive green in colour.'); // → 0.6060606060606061
 ```
 
@@ -78,18 +80,16 @@ Compares `mainString` against each string in `targetStrings`.
   'For sale: green Subaru Impreza, 210,000 miles',
   'For sale: table in very good condition, olive green in colour.',
   'Wanted: mountain bike with at least 21 gears.',
+  null
 ]);
 // →
-{ ratings:
-   [ { target: 'For sale: green Subaru Impreza, 210,000 miles',
-       rating: 0.2558139534883721 },
-     { target: 'For sale: table in very good condition, olive green in colour.',
-       rating: 0.6060606060606061 },
-     { target: 'Wanted: mountain bike with at least 21 gears.',
-       rating: 0.1411764705882353 } ],
-  bestMatch:
-   { target: 'For sale: table in very good condition, olive green in colour.',
-     rating: 0.6060606060606061 },
+{ ratings:[ 
+     { target: 'For sale: green Subaru Impreza, 210,000 miles', rating: 0.2558139534883721 },
+     { target: 'For sale: table in very good condition, olive green in colour.', rating: 0.6060606060606061 },
+     { target: 'Wanted: mountain bike with at least 21 gears.', rating: 0.1411764705882353 },
+     { target: null, rating: 0.0 }
+  ],
+  bestMatch: { target: 'For sale: table in very good condition, olive green in colour.', rating: 0.6060606060606061 },
   bestMatchIndex: 1
 }
 ```
@@ -101,6 +101,7 @@ StringSimilarity.findBestMatch('Olive-green table for sale, in extremely good co
   'For sale: green Subaru Impreza, 210,000 miles',
   'For sale: table in very good condition, olive green in colour.',
   'Wanted: mountain bike with at least 21 gears.',
+  null
 ]);
 ```
 
@@ -108,4 +109,4 @@ StringSimilarity.findBestMatch('Olive-green table for sale, in extremely good co
 
 **_based on 'string-similarity' Javascript project_** : [https://github.com/aceakash/string-similarity](https://github.com/aceakash/string-similarity)
 
-thanks [@shinayser](https://github.com/shinayser)
+thanks [@shinayser](https://github.com/shinayser) and [@nilsreichardt](https://github.com/nilsreichardt)

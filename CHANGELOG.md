@@ -1,7 +1,11 @@
+## 2.0.0
+- migrated to null safety
+- require dart sdk >= 2.12
+
 ## 1.1.0
 
-- Added extensions.
-- Added 'toString()' methods for BestMatch and Rating classes for better debugging.
+- added extensions.
+- added 'toString()' methods for BestMatch and Rating classes for better debugging.
 - require dart sdk >= 2.6
 
 ## 1.0.2
