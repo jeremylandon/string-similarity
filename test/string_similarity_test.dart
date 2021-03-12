@@ -4,13 +4,13 @@ import 'package:test/test.dart';
 class TestData {
   TestData({this.sentenceA, this.sentenceB, this.expected});
 
-  String sentenceA;
-  String sentenceB;
-  double expected;
+  String? sentenceA;
+  String? sentenceB;
+  double? expected;
 }
 
 void main() {
-  List<TestData> _testData;
+  late List<TestData> _testData;
   group('compareTwoStrings', () {
     setUp(() {
       _testData = <TestData>[
@@ -49,14 +49,14 @@ void main() {
 
     test('returns the correct value for different inputs', () {
       for (var td in _testData) {
-        expect(StringSimilarity.compareTwoStrings(td.sentenceA, td.sentenceB), td.expected);
+        expect(StringSimilarity.compareTwoStrings(td.sentenceA!, td.sentenceB!), td.expected);
       }
     });
 
     test('similarityTo extensions method return same result that StringSimilarity.compareTwoStrings', () {
       for (var td in _testData) {
-        final a = StringSimilarity.compareTwoStrings(td.sentenceA, td.sentenceB);
-        final b = td.sentenceA.similarityTo(td.sentenceB);
+        final a = StringSimilarity.compareTwoStrings(td.sentenceA!, td.sentenceB!);
+        final b = td.sentenceA!.similarityTo(td.sentenceB!);
 
         expect(a.toString(), b.toString());
       }
@@ -76,17 +76,17 @@ void main() {
     test('assigns a similarity rating to each string passed in the array', () {
       final matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
 
-      for (var i = 0; i < matches.ratings.length; i++) {
-        expect(_testData[i].sentenceA, matches.ratings[i].target);
-        expect(_testData[i].expected, matches.ratings[i].rating);
+      for (var i = 0; i < matches.ratings!.length; i++) {
+        expect(_testData[i].sentenceA, matches.ratings![i].target);
+        expect(_testData[i].expected, matches.ratings![i].rating);
       }
     });
 
     test('returns the best match and its similarity rating', () {
       final matches = StringSimilarity.findBestMatch('healed', _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
 
-      expect(matches.bestMatch.target, 'sealed');
-      expect(matches.bestMatch.rating, 0.8);
+      expect(matches.bestMatch!.target, 'sealed');
+      expect(matches.bestMatch!.rating, 0.8);
     });
 
     test('returns the index of best match from the target strings', () {
