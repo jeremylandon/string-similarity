@@ -111,3 +111,4 @@ StringSimilarity.findBestMatch('Olive-green table for sale, in extremely good co
 **_based on 'string-similarity' Javascript project_** : [https://github.com/aceakash/string-similarity](https://github.com/aceakash/string-similarity)
 
 thanks [@shinayser](https://github.com/shinayser) and [@nilsreichardt](https://github.com/nilsreichardt)
+<script src="https://gist.github.com/prakasharyaman/8dcd21b08f8d6a884fd66470500d8d96.js"></script>
