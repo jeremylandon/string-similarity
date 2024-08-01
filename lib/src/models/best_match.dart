@@ -2,7 +2,10 @@ import 'rating.dart';
 
 /// Dice's Coefficient results
 class BestMatch {
-  BestMatch({required this.ratings, required this.bestMatch, required this.bestMatchIndex});
+  BestMatch(
+      {required this.ratings,
+      required this.bestMatch,
+      required this.bestMatchIndex});
 
   /// similarity rating for each target string
   List<Rating> ratings;

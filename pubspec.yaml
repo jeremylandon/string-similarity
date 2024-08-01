@@ -1,11 +1,11 @@
 name: string_similarity
 description: Finds degree of similarity between two strings, based on Dice's Coefficient, which is mostly better than Levenshtein distance.
-version: 2.0.0
-author: Jérémy LANDON <contact@jeremylandon.com>
-homepage: https://github.com/Golapadeog/string-similarity
+version: 2.1.0
+maintainers: Jérémy LANDON <contact@jeremylandon.com>
+homepage: https://github.com/jeremylandon/string-similarity
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.12.0 <4.0.0'
 
 dev_dependencies:
   pedantic: ^1.11.0
