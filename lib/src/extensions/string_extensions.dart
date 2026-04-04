@@ -20,7 +20,7 @@ extension StringExtensions on String? {
   /// _(same as StringSimilarity.findBestMatch method)_
   ///
   /// ##### Arguments
-  /// - targetStrings (List<String?>): Each string in this array will be matched against the main string.
+  /// - targetStrings (`List<String?>`): Each string in this array will be matched against the main string.
   ///
   /// ##### Returns
   /// (BestMatch): An object with a ratings property, which gives a similarity rating for each target string, a bestMatch property, which specifies which target string was most similar to the main string, and a bestMatchIndex property, which specifies the index of the bestMatch in the targetStrings array.

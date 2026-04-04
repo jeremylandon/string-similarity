@@ -14,6 +14,12 @@ void main() {
   group('compareTwoStrings', () {
     setUp(() {
       _testData = <TestData>[
+        TestData(sentenceA: '', sentenceB: '', expected: 1),
+        TestData(sentenceA: 'a', sentenceB: 'a', expected: 1), 
+        TestData(sentenceA: 'a', sentenceB: 'ab', expected: 0), // Dice coefficient is 0 because there are no bigrams in common
+        TestData(sentenceA: 'ab', sentenceB: 'a', expected: 0), // Dice coefficient is 0 because there are no bigrams in common
+        TestData(sentenceA: 'ab', sentenceB: 'ba', expected: 0), // Dice coefficient is 0 because there are no bigrams in common
+        TestData(sentenceA: 'ab', sentenceB: 'ab', expected: 1),
         TestData(sentenceA: 'french', sentenceB: 'quebec', expected: 0),
         TestData(sentenceA: 'france', sentenceB: 'france', expected: 1),
         TestData(sentenceA: 'fRaNce', sentenceB: 'france', expected: 0.2),
@@ -38,7 +44,7 @@ void main() {
         ),
         TestData(
           sentenceA: 'Olive-green table for sale, in extremely good condition.',
-          sentenceB: 'For sale: green Subaru Impreza, 210,000 miles',
+          sentenceB: 'For sale: green Subaru  Impreza, 210,000 miles',
           expected: 0.2558139534883721,
         ),
         TestData(

@@ -105,6 +105,12 @@ StringSimilarity.findBestMatch('Olive-green table for sale, in extremely good co
 ]);
 ```
 
+## ⚠️ Limitations
+
+Due to the nature of Dice's Coefficient, strings with a length lower than 2 characters are not meaningful and will always return a similarity score of `0.0`.
+
+This is because the algorithm relies on bigrams (pairs of consecutive characters), which cannot be formed from strings shorter than 2 characters.
+
 ## :crystal_ball: Credit
 
 **_based on 'string-similarity' Javascript project_** : [https://github.com/aceakash/string-similarity](https://github.com/aceakash/string-similarity)

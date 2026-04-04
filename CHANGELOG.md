@@ -1,3 +1,9 @@
+## 2.2.0
+
+- Update documentation
+- Fix analysis warnings
+- Optimizations
+
 ## 2.0.0
 - migrated to null safety
 - require dart sdk >= 2.12
