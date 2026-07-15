@@ -34,6 +34,11 @@ class StringSimilarity {
   /// ##### Returns
   /// (BestMatch): An object with a ratings property, which gives a similarity rating for each target string, a bestMatch property, which specifies which target string was most similar to the main string, and a bestMatchIndex property, which specifies the index of the bestMatch in the targetStrings array.
   static BestMatch findBestMatch(String? mainString, List<String?> targetStrings) {
+    if (targetStrings.isEmpty) {
+      throw ArgumentError.value(
+          targetStrings, 'targetStrings', 'must not be empty');
+    }
+
     final targetCount = targetStrings.length;
     final ratings = List<Rating>.filled(targetCount, Rating(), growable: false);
     final normalizedMainString = _normalize(mainString);

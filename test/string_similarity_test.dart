@@ -116,6 +116,19 @@ void main() {
       }
     });
 
+    test('rejects an empty target list', () {
+      expect(
+        () => StringSimilarity.findBestMatch('healed', []),
+        throwsA(
+          isA<ArgumentError>().having(
+            (error) => error.name,
+            'name',
+            'targetStrings',
+          ),
+        ),
+      );
+    });
+
     test('returns the best match and its similarity rating', () {
       final matches = StringSimilarity.findBestMatch('healed',
           _testData.map((TestData testEntry) => testEntry.sentenceA).toList());
