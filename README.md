@@ -1,118 +1,125 @@
-# string-similarity
+# string_similarity
 
-Finds degree of similarity between two strings, based on [Dice's Coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient), which is mostly better than [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance).
+[![pub package](https://img.shields.io/pub/v/string_similarity.svg)](https://pub.dev/packages/string_similarity)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeremylandon/string-similarity/blob/master/LICENSE)
 
-## :page_facing_up: Table of Contents
+A fast, dependency-free Dart package for measuring the similarity between two
+strings with the Sørensen–Dice coefficient.
 
-- [Usage](#usage)
-- [API](#api)
-  - ['string'.similarityTo(other)](#stringsimilarityToother)
-    - [Arguments](#arguments)
-    - [Returns](#returns)
-    - [Examples](#examples)
-  - ['string'.bestMatch(targetStrings)](#stringbestMatchtargetStrings)
-    - [Arguments](#arguments-1)
-    - [Returns](#returns-1)
-    - [Examples](#examples-1)
+Use it for fuzzy search, spelling suggestions, duplicate detection, and ranking
+the closest match from a list.
 
-## :video_game: Usage
+## ✨ Why string_similarity?
 
-In your code:
+- Simple extension methods and static methods
+- Scores from `0.0` (completely different) to `1.0` (identical)
+- Best-match search with individual ratings and the winning index
+- No runtime dependencies
+- Works on every platform supported by Dart and Flutter
 
-```dart
-import  'package:string_similarity/string_similarity.dart';
+## 📦 Installation
 
-var similarity = 'french'.similarityTo('quebec'); // or StringSimilarity.compareTwoStrings('french', 'quebec');
-
-var matches = 'healed'.bestMatch(['edward', 'sealed', 'theatre']); // or StringSimilarity.findBestMatch('healed', ['edward', 'sealed', 'theatre']);
+```console
+dart pub add string_similarity
 ```
 
-## :books: API
-
-### 'string'.similarityTo(other)
-
-Returns a fraction between 0 and 1, which indicates the degree of similarity between the two strings. 0 indicates completely different strings, 1 indicates identical strings. The comparison is case and diacritic sensitive.
-
-#### Arguments
-
-- other (String): The second string
-
-Order does not make a difference.
-
-#### Returns
-
-(double): A fraction from 0 to 1, both inclusive. Higher number indicates more similarity.
-
-#### Examples
+Then import the package:
 
 ```dart
-'healed'.similarityTo('sealed'); // → 0.8
-
-'france'.similarityTo('FrancE'); // → 0.6
-
-'x'.similarityTo(null); // → 0.0
-
-'Olive-green table for sale, in extremely good condition.'.similarityTo('For sale: table in very good  condition, olive green in colour.'); // → 0.6060606060606061
+import 'package:string_similarity/string_similarity.dart';
 ```
 
-or you can use the `StringSimilarity.compareTwoStrings` static method
+## 🚀 Compare two strings
 
 ```dart
-StringSimilarity.compareTwoStrings('healed', 'sealed'); // → 0.8
+final score = 'healed'.similarityTo('sealed');
+
+print(score); // 0.8
 ```
 
-### 'string'.bestMatch(targetStrings)
-
-Compares `mainString` against each string in `targetStrings`.
-
-#### Arguments
-
-- targetStrings (List\<String\>): Each string in this array will be matched against the main string.
-
-#### Returns
-
-(BestMatch): An object with a `ratings` property, which gives a similarity rating for each target string, a `bestMatch` property, which specifies which target string was most similar to the main string, and a `bestMatchIndex` property, which specifies the index of the bestMatch in the targetStrings array.
-
-#### Examples
+The equivalent static method is:
 
 ```dart
-'Olive-green table for sale, in extremely good condition.'.bestMatch([
-  'For sale: green Subaru Impreza, 210,000 miles',
-  'For sale: table in very good condition, olive green in colour.',
-  'Wanted: mountain bike with at least 21 gears.',
-  null
+final score = StringSimilarity.compareTwoStrings('healed', 'sealed');
+```
+
+## 🏆 Find the best match
+
+```dart
+final result = 'healed'.bestMatch([
+  'edward',
+  'sealed',
+  'theatre',
 ]);
-// →
-{ ratings:[ 
-     { target: 'For sale: green Subaru Impreza, 210,000 miles', rating: 0.2558139534883721 },
-     { target: 'For sale: table in very good condition, olive green in colour.', rating: 0.6060606060606061 },
-     { target: 'Wanted: mountain bike with at least 21 gears.', rating: 0.1411764705882353 },
-     { target: null, rating: 0.0 }
-  ],
-  bestMatch: { target: 'For sale: table in very good condition, olive green in colour.', rating: 0.6060606060606061 },
-  bestMatchIndex: 1
-}
+
+print(result.bestMatch.target); // sealed
+print(result.bestMatch.rating); // 0.8
+print(result.bestMatchIndex); // 1
 ```
 
-or you can use the `StringSimilarity.findBestMatch` static method
+Every candidate and its score remain available in `result.ratings`.
+
+The equivalent static method is:
 
 ```dart
-StringSimilarity.findBestMatch('Olive-green table for sale, in extremely good condition.', [
-  'For sale: green Subaru Impreza, 210,000 miles',
-  'For sale: table in very good condition, olive green in colour.',
-  'Wanted: mountain bike with at least 21 gears.',
-  null
-]);
+final result = StringSimilarity.findBestMatch(
+  'healed',
+  ['edward', 'sealed', 'theatre'],
+);
 ```
 
-## ⚠️ Limitations
+## 🧠 How it works
 
-Due to the nature of Dice's Coefficient, strings with a length lower than 2 characters are not meaningful and will always return a similarity score of `0.0`.
+The package compares adjacent character pairs (bigrams) using the
+[Sørensen–Dice coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient).
+Whitespace is removed before comparison. Letter case and diacritics are kept,
+so `Cote`, `cote`, and `côte` are different values.
 
-This is because the algorithm relies on bigrams (pairs of consecutive characters), which cannot be formed from strings shorter than 2 characters.
+## 🔡 Case-insensitive comparison
 
-## :crystal_ball: Credit
+Normalize both strings before comparing them:
 
-**_based on 'string-similarity' Javascript project_** : [https://github.com/aceakash/string-similarity](https://github.com/aceakash/string-similarity)
+```dart
+final score = 'DART'.toLowerCase().similarityTo('dart'.toLowerCase());
 
-thanks [@shinayser](https://github.com/shinayser) and [@nilsreichardt](https://github.com/nilsreichardt)
+print(score); // 1.0
+```
+
+## 🧩 Available methods
+
+| API | Returns | Description |
+| --- | --- | --- |
+| `value.similarityTo(other)` | `double` | Compares two nullable strings. |
+| `value.bestMatch(targets)` | `BestMatch` | Rates every nullable target and selects the best one. |
+| `StringSimilarity.compareTwoStrings(first, second)` | `double` | Static alternative to `similarityTo`. |
+| `StringSimilarity.findBestMatch(value, targets)` | `BestMatch` | Static alternative to `bestMatch`. |
+
+`BestMatch` provides:
+
+- `ratings`: every target and its score
+- `bestMatch`: the highest-rated target
+- `bestMatchIndex`: the winning target's original index
+
+## ⚙️ Behavior and edge cases
+
+| Input | Result |
+| --- | --- |
+| Two identical values, including `null` or `''` | `1.0` |
+| Only one value is `null` or empty | `0.0` |
+| Different values where either has fewer than two characters | `0.0` |
+| Several targets share the highest score | The first one wins |
+| The target list is empty | Throws `ArgumentError` |
+
+## 🔎 Comparison details
+
+- Whitespace is ignored, but punctuation is not.
+- Comparison is case-sensitive and diacritic-sensitive.
+- The algorithm works on UTF-16 code units rather than grapheme clusters, so
+  some emoji and combined Unicode characters may not behave like visible
+  characters.
+- Sørensen–Dice measures shared bigrams. It is not a drop-in replacement for
+  edit-distance algorithms such as Levenshtein distance.
+
+## 📄 License
+
+Licensed under the permissive [MIT License](https://github.com/jeremylandon/string-similarity/blob/master/LICENSE).

@@ -1,3 +1,9 @@
+## 2.2.1
+
+- Refresh README and pub.dev example.
+- Clarify license and comparison behavior.
+- Minor performance optimizations.
+
 ## 2.2.0
 
 - Update documentation

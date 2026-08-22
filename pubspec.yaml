@@ -1,6 +1,6 @@
 name: string_similarity
-description: Finds degree of similarity between two strings, based on Dice's Coefficient, which is mostly better than Levenshtein distance.
-version: 2.2.0
+description: Fast, dependency-free string similarity scoring and best-match ranking using the Sørensen–Dice coefficient.
+version: 2.2.1
 maintainers: Jérémy LANDON <contact@jeremylandon.com>
 homepage: https://github.com/jeremylandon/string-similarity
 
